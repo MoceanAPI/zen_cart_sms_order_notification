@@ -10,6 +10,9 @@ Open your admin panel and open “Tools” -> “MoceanAPI Tool”
 Set your “api key” and “api secret” and enter your Message From for title on sms
 Note: ”Message From”  you have special tags for your sms title
 
+A Mocean account is required to configure MoceanAPI key and MoceanAPI secret.
+Try for FREE now. 20 trial SMS credits will be given upon [registration](https://dashboard.moceanapi.com/register?fr=zencart_order_notification). Additional SMS credits can be requested and is subject to approval by MoceanAPI
+
 
 # MoceanAPI Admin Settings
  - You have option for notification as owner  store for any new order
