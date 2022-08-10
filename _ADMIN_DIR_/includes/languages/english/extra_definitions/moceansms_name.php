@@ -12,6 +12,7 @@ define('TEXT_MOCEANSMS', 'MoceanAPI');
 define('MOCEANSMS_MESSAGE_FROM', 'Message From');
 define('MOCEANSMS_KEY', 'Mocean KEY');
 define('MOCEANSMS_SECRET', 'Mocean SECRET');
+define('MOCEANSMS_FEEDBACK_FORM', 'Send us a feedback!');
 define('MOCEANSMS_SAVE_CHANGES', 'Save Changes');
 define('MOCEANSMS_INVALID_INPUTS', 'Invalid key or secret code');
 define('MOCEANSMS_SUCCESSFULLY_CHANGES', 'The changes have been made successfully');

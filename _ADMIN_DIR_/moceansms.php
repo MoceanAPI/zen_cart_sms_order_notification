@@ -27,7 +27,7 @@ if($_GET['action'] == 'settings' && isset($_POST['submit_settings']) && $_POST['
 		$mocean_key_request = $db->Execute("SELECT * FROM ".DB_PREFIX."mocean_config WHERE `key`='config_key' LIMIT 1");
 		$mocean_secret_request = $db->Execute("SELECT * FROM ".DB_PREFIX."mocean_config WHERE `key`='config_secret' LIMIT 1");
 		$message_from_request = $db->Execute("SELECT * FROM ".DB_PREFIX."mocean_config WHERE `key`='message_from' LIMIT 1");
-		
+
 		if($mocean_key_request->RecordCount() > 0) {
 			$sql_update_key = "UPDATE  ".DB_PREFIX."mocean_config SET  value = :key: WHERE `key` = 'config_key'";
 			$sql_update_key = $db->bindVars($sql_update_key, ':key:', $input_mocean_key, 'string');
@@ -37,7 +37,7 @@ if($_GET['action'] == 'settings' && isset($_POST['submit_settings']) && $_POST['
 			$sql_insert_key = $db->bindVars($sql_insert_key, ':key:', $input_mocean_key, 'string');
 			$db->Execute($sql_insert_key);
 		}
-		
+
 		if($mocean_secret_request->RecordCount() > 0) {
 			$sql_update_secret = "UPDATE  ".DB_PREFIX."mocean_config SET  value = :secret: WHERE `key` = 'config_secret'";
 			$sql_update_secret = $db->bindVars($sql_update_key, ':secret:', $input_mocean_secret, 'string');
@@ -47,11 +47,11 @@ if($_GET['action'] == 'settings' && isset($_POST['submit_settings']) && $_POST['
 			$sql_insert_secret = $db->bindVars($sql_insert_secret, ':secret:', $input_mocean_secret, 'string');
 			$db->Execute($sql_insert_secret);
 		}
-		
+
 		if($message_from_request->RecordCount() > 0) {
 			$sql_update_message_from = "UPDATE  ".DB_PREFIX."mocean_config SET  value = :message_from: WHERE `key` = 'message_from'";
 			$sql_update_message_from = $db->bindVars($sql_update_message_from, ':message_from:', $input_message_from, 'string');
-			$db->Execute($sql_update_message_from);	
+			$db->Execute($sql_update_message_from);
 		} else {
 			$sql_insert_message_from ="INSERT INTO ".DB_PREFIX."mocean_config (`key`,`value`) VALUES ('message_from', :message_from:)";
 			$sql_insert_message_from = $db->bindVars($sql_insert_message_from, ':message_from:', $input_message_from, 'string');
@@ -71,36 +71,36 @@ if($_GET['action'] == 'admin_settings' && isset($_POST['admin_settings']) && $_P
 		$admin_notify_checkbox = 'false';
 	}
 	$admin_phone_input =  $_POST['admin_phone'];
-	
+
 	$admin_notify_input_message =  $_POST['admin_notify_message'];
 if(!empty($admin_notify_checkbox) && !empty($admin_notify_checkbox)) {
-	
+
 		$admin_notify = $db->Execute("SELECT * FROM ".DB_PREFIX."mocean_config WHERE `key`='admin_notify' LIMIT 1");
 		$admin_phone = $db->Execute("SELECT * FROM ".DB_PREFIX."mocean_config WHERE `key`='admin_phone' LIMIT 1");
 		$admin_notify_message = $db->Execute("SELECT * FROM ".DB_PREFIX."mocean_config WHERE `key`='admin_notify_message' LIMIT 1");
-		
+
 		if($admin_notify->RecordCount() > 0 && $admin_notify_message->RecordCount() > 0 && $admin_phone->RecordCount() > 0) {
-	
+
 			$admin_notify_update = "UPDATE  ".DB_PREFIX."mocean_config SET  value = '$admin_notify_checkbox' WHERE `key` = 'admin_notify'";
 			$db->Execute($admin_notify_update);
-			
+
 			$admin_phone_update = "UPDATE  ".DB_PREFIX."mocean_config SET  value = :admin_phone: WHERE `key` = 'admin_phone'";
 			$admin_phone_update = $db->bindVars($admin_phone_update, ':admin_phone:', $admin_phone_input, 'string');
 
 			$db->Execute($admin_phone_update);
-			
+
 			$admin_notify_message_update = "UPDATE  ".DB_PREFIX."mocean_config SET  value = :message: WHERE `key` = 'admin_notify_message'";
 			$admin_notify_message_update = $db->bindVars($admin_notify_message_update, ':message:', $admin_notify_input_message, 'string');
 			$db->Execute($admin_notify_message_update);
-			
+
 		} else {
 			$admin_notify_insert = "INSERT INTO ".DB_PREFIX."mocean_config (`key`,`value`) VALUES ('admin_notify', '$admin_notify_checkbox')";
 			$db->Execute($admin_notify_insert);
-			
+
 			$admin_phone_insert ="INSERT INTO ".DB_PREFIX."mocean_config (`key`,`value`) VALUES ('admin_phone', :admin_phone:)";
 			$admin_phone_insert = $db->bindVars($admin_phone_insert, ':admin_phone:', $admin_phone_input, 'string');
 			$db->Execute($admin_phone_insert);
-			
+
 			$admin_notify_message_insert ="INSERT INTO ".DB_PREFIX."mocean_config (`key`,`value`) VALUES ('admin_notify_message', :message:)";
 			$admin_notify_message_insert = $db->bindVars($admin_notify_message_insert, ':message:', $admin_notify_input_message, 'string');
 			$db->Execute($admin_notify_message_insert);
@@ -110,7 +110,7 @@ if(!empty($admin_notify_checkbox) && !empty($admin_notify_checkbox)) {
 		$update_admin_settings_result['error_message'] = MOCEANSMS_INVALID_INPUTS;
 	}
 
-	
+
 }
 
 
@@ -134,7 +134,7 @@ if($_GET['action'] == 'customer_settings' && isset($_POST['customer_settings']) 
 		if($value == '1') {
 			$value = 'true';
 		}
-		
+
 		$check_notify = "SELECT * FROM ".DB_PREFIX."mocean_config WHERE `key`=:key: LIMIT 1";
 		$check_notify = $db->bindVars($check_notify, ':key:', $key, 'string');
 		$check_values = $db->Execute($check_notify);
@@ -188,7 +188,13 @@ $orders_status = $db->Execute($orders_status_query_raw);
     <meta name="robots" content="noindex, nofollow">
     <link href="includes/stylesheet.css" rel="stylesheet">
     <link rel="stylesheet" href="includes/cssjsmenuhover.css" media="all" id="hoverJS">
+    <link rel="stylesheet" href="includes/css/mocean-assets/animate.min.css" media="all" id="hoverJS">
+    <link rel="stylesheet" href="includes/css/mocean-assets/cookieconsent.min.css" media="all" id="hoverJS">
+    <link rel="stylesheet" href="includes/css/mocean-assets/main.css" media="all" id="hoverJS">
     <script src="includes/menu.js"></script>
+    <script src="includes/javascript/jquery.min.js"></script>
+    <script src="includes/javascript/mocean-assets/cookieconsent.min.js"></script>
+    <script src="includes/javascript/mocean-assets/yandex.js"></script>
     <!--Load the AJAX API FOR GOOGLE GRAPHS -->
     <script src="https://www.google.com/jsapi"></script>
 
@@ -207,7 +213,7 @@ $orders_status = $db->Execute($orders_status_query_raw);
 		</ul>
 
 	<div class="tab-content">
-	
+
 	  <div id="settings" class="tab-pane fade <?php if(empty($_GET['action']) || $_GET['action'] == 'settings'){ ?> in active <?php }?>">
 		<h3><?=BOX_TITLE_MOCEANSMS_CONFIGURATION?></h3>
 		<?php if(isset($update_result_settings['error_message'])) { ?>
@@ -235,12 +241,18 @@ $orders_status = $db->Execute($orders_status_query_raw);
 			<label class="col-md-12" for="pwd"><?=MOCEANSMS_SECRET?></label>
 			<input value="<?=$mocean_secret?>" type="password" name="secret" class="form-control">
 		  </div>
+		  <div class="form-group">
+			<label class="col-md-12" for="pwd">
+                <a href="https://bit.ly/3QA0Ilq" target="_blank" rel="noopener noreferrer"><?=MOCEANSMS_FEEDBACK_FORM?></a>
+            </label>
+		  </div>
+          <div style="padding-bottom: 25px;"></div>
 		  <input type="hidden" value="1" name="submit_settings">
 		  <input class="btn btn-default" type="submit" value="<?=MOCEANSMS_SAVE_CHANGES?>">
 		</form>
 	  </div>
-	  
-	  
+
+
 	  <div id="admin_settings" class="tab-pane fade <?php if($_GET['action'] == 'admin_settings'){ ?> in active <?php }?>">
 		<h3><?=MOCEANSMS_ADMIN_SETTINGS?></h3>
 		<?php if(isset($update_admin_settings_result['error_message'])) { ?>
@@ -269,7 +281,7 @@ $orders_status = $db->Execute($orders_status_query_raw);
 			<label class="col-md-12" ><?=MOCEANSMS_ADMIN_PHONE?></label>
 			<input name="admin_phone" class="form-control"  value="<?=$admin_phone?>">
 		  </div>
-		  
+
 		 <div class="form-group">
 			<label class="col-md-12" ><?=MOCEANSMS_ADMIN_SMS_MESSAGE?></label>
 			<textarea name="admin_notify_message" class="form-control"  rows="3"><?=$admin_message?></textarea><br/>
@@ -331,7 +343,7 @@ $orders_status = $db->Execute($orders_status_query_raw);
 			<?php
 				}
 			?>
-		  
+
 		  <input type="hidden" value="1" name="customer_settings">
 		  <input class="btn btn-default" type="submit" value="<?=MOCEANSMS_SAVE_CHANGES?>">
 		</form>
